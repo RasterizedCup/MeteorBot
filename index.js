@@ -78,6 +78,9 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async (interaction) =>{
     if(interaction.commandName === 'spawnmeteorite'){
+        if(interaction.channel.id !== cachedCommandChannel)
+            return;
+
         var msg = await interaction.channel.send("Building a meteor...");
         console.log(interaction);
 

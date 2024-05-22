@@ -17,6 +17,6 @@ module.exports = {
 			option.setName('z-maximum')
 				.setDescription('custom maximum z value to spawn meteor')),
     async execute(interaction) {
-		interaction.reply("Just a moment...");
+		interaction.reply("Just a second...");
     },    
 };

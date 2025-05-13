@@ -101,8 +101,6 @@ client.on('interactionCreate', async (interaction) =>{
 client.on('messageReactionAdd', async (reaction, user) =>{
     console.log("reaction detected");
     if(user.id != botID){ // bot id
-        //reaction.message.reply("reaction of " + reaction.emoji.name + " was added");
-
         switch (reaction.emoji.name){
             case "✅":
                 handleMeteorSuccess(reaction);
@@ -152,6 +150,9 @@ function handleMeteorSuccess(reaction){
     .then(thread =>{
         var embedColor;
         switch(MeteorSize){
+            case "TINY":
+                embedColor = 0x64F000;
+                break;
             case "SMALL":
                 embedColor = 0xEEC200;
                 break;
@@ -226,11 +227,14 @@ function getMeteorLocation(){
 }
 
 function getMeteorSize(){
-    var val = Math.random() * (100 - 0) + 0;
-    const smallChance = 80;
-    const mediumChance = smallChance + 15;
+    var val = Math.random() * (100 - 0) + 0; // 0-100 random number
+    const tinyChance = 60
+    const smallChance = tinyChance + 27;
+    const mediumChance = smallChance + 10;
     console.log(val)
     switch(true){ // check if these conditions are true
+        case (val < tinyChance):
+            return "TINY";
         case (val < smallChance):
             return "SMALL";
         case (val < mediumChance):
@@ -246,4 +250,4 @@ function getMeteorSize(){
 // 1177206720368488488 - staff bot spam 1177206720368488488
 // 1228317548991352934 - meteor tracking thread 1228317548991352934
 // 1231682674490605708 - test tracking thread
-// size distro: 80& small, 15% medium, 5% large
+// size distro: 60% tiny, 27& small, 10% medium, 3% large
